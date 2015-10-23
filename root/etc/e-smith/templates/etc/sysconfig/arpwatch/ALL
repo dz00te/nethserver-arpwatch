@@ -14,6 +14,6 @@ else {
 }
 
 my $interfaces = ${'arpwatch'}{'interface'};
-$OUT .= "OPTIONS=\"-i $interfaces  -f /var/lib/arpwatch/arp.dat -u arpwatch -e root -s 'arpwatch\@${'DomainName'}'\"\n";
+$OUT .= "OPTIONS=\"-i $interfaces  $bogonset -f /var/lib/arpwatch/arp.dat -u arpwatch -e root -s 'arpwatch\@${'DomainName'}'\"\n";
 }
 
