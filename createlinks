@@ -9,3 +9,6 @@ event_actions($event,
 
 #Templates to expand
 templates2events("/etc/sysconfig/arpwatch", $event);
+
+event_services($event, 'arpwatch' => 'restart');
+
