@@ -5,15 +5,16 @@
 my $bogonset='';
 my $bogon = ${'arpwatch'}{'bogon'};
 
+
 if ($bogon eq 'enabled') {
  $bogonset = '';
 }
-
 else {
  $bogonset = '-N';
 }
 
 my $interfaces = ${'arpwatch'}{'interface'};
-$OUT .= "OPTIONS=\"-i $interfaces  $bogonset -f /var/lib/arpwatch/arp.dat -u arpwatch -e root -s 'arpwatch\@${'DomainName'}'\"\n";
-}
+my $mailset= ${'arpwatch'}{'mail'};
 
+$OUT .= "OPTIONS=\"-i $interfaces  $bogonset -f /var/lib/arpwatch/arp.dat -u arpwatch -e $mailset -s 'arpwatch\@${'DomainName'}'\"\n";
+}
