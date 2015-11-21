@@ -5,7 +5,6 @@
 my $bogonset='';
 my $bogon = ${'arpwatch'}{'bogon'};
 
-
 if ($bogon eq 'enabled') {
  $bogonset = '';
 }
@@ -14,7 +13,7 @@ else {
 }
 
 my $interfaces = ${'arpwatch'}{'interface'};
-my $mailset= ${'arpwatch'}{'mail'};
+my $mailset= ${'arpwatch'}{'email'};
 
 $OUT .= "OPTIONS=\"-i $interfaces  $bogonset -f /var/lib/arpwatch/arp.dat -u arpwatch -e $mailset -s 'arpwatch\@${'DomainName'}'\"\n";
 }
