@@ -62,7 +62,7 @@ rm -rf $RPM_BUILD_ROOT
 %post
 
 %changelog
-* Tue Oct 21 2015 dz00te <dz00te@framassa.org> 1.0.0-1.ns6
+* Tue Nov 21 2015 dz00te <dz00te@framassa.org> 1.0.0-1.ns6
 - First release to Nethserver
   Thanks to Stephane de Labrusse, JP Pialasse, Daniel B.
 
