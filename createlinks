@@ -20,5 +20,5 @@ event_services($event, 'arpwatch' => 'restart');
 # don't expand the template here
 #
 
-my $event = "nethserver-arpwatch-save":
+my $event = "nethserver-arpwatch-save";
 event_services($event, 'arpwatch' => 'restart');
