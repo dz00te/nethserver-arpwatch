@@ -1,14 +1,24 @@
 #!/usr/bin/perl -w
 
 use esmith::Build::CreateLinks qw(:all);
+#use strict;
+
+#
+# nethserver-arpwatch-update event
+#
 
 my $event = "nethserver-arpwatch-update";
-event_actions($event,
-'initialize-default-databases' => '00');
 
+event_actions($event,'initialize-default-databases' => '00');
 
 #Templates to expand
 templates2events("/etc/sysconfig/arpwatch", $event);
-
 event_services($event, 'arpwatch' => 'restart');
 
+#
+# actions for nethserver-atpwatch-save event
+# don't expand the template here
+#
+
+my $event = "nethserver-arpwatch-save":
+event_services($event, 'arpwatch' => 'restart');

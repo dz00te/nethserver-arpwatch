@@ -2,7 +2,7 @@
 
 %define name nethserver-arpwatch
 %define version 1.0.0
-%define release 1
+%define release 2
 %define dist .ns6
 
 Summary: Arpwatch is a tool that monitors ethernet activity
@@ -62,6 +62,9 @@ rm -rf $RPM_BUILD_ROOT
 %post
 
 %changelog
+* Tue Nov 23 2015 dz00te <dz00te@framassa.org> 1.0.0-2.ns6
+- Enabled service after install on green ethX
+
 * Tue Nov 21 2015 dz00te <dz00te@framassa.org> 1.0.0-1.ns6
 - First release to Nethserver
   Thanks to Stephane de Labrusse, JP Pialasse, Daniel B.
