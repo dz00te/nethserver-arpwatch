@@ -2,6 +2,12 @@
 # -e <email>    : the <email> where to send the reports
 # -s <from>     : the <from>-address
 {
+#use strict;
+use esmith::NetworksDB;
+my $ndb = esmith::NetworksDB->open_ro();
+my $db = esmith::ConfigDB->open or die "Couldn't open ConfigDB\n";
+my $interfa = '';
+
 my $bogonset='';
 my $bogon = ${'arpwatch'}{'bogon'};
 
@@ -12,8 +18,23 @@ else {
  $bogonset = '-N';
 }
 
-my $interfaces = ${'arpwatch'}{'interface'};
+
+### set prop interface on green net
+
+foreach my $i ($ndb->green) {
+     my $intx = $i->key;
+     $interfa = $interfa . $intx . " ";
+     if ($intx eq '') {
+        $interfaces = $i;
+     } else {
+     }    
+}
+print "$interfa\n";
+
+$db->set_prop('arpwatch', 'interface', $interfa);
+
 my $mailset= ${'arpwatch'}{'email'};
 
-$OUT .= "OPTIONS=\"-i $interfaces  $bogonset -f /var/lib/arpwatch/arp.dat -u arpwatch -e $mailset -s 'arpwatch\@${'DomainName'}'\"\n";
+$OUT .= "OPTIONS=\"-i $interfa  $bogonset -f /var/lib/arpwatch/arp.dat -u arpwatch -e $mailset -s 'arpwatch\@${'DomainName'}'\"\n";
 }
+
