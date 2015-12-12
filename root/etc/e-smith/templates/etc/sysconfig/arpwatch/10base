@@ -29,12 +29,15 @@ foreach my $i ($ndb->green) {
      } else {
      }    
 }
-print "$interfa\n";
+#print "$interfa\n";
 
 $db->set_prop('arpwatch', 'interface', $interfa);
 
 my $mailset= ${'arpwatch'}{'email'};
 
-$OUT .= "OPTIONS=\"-i $interfa  $bogonset -f /var/lib/arpwatch/arp.dat -u arpwatch -e $mailset -s 'arpwatch\@${'DomainName'}'\"\n";
+$OUT .= "OPTIONS=\" $bogonset -f /var/lib/arpwatch/arp.dat -u arpwatch -e $mailset -s 'arpwatch\@${'DomainName'}'\"\n";
+$OUT .= "INTERFACES=\"$interfa\"\n";
+
+#$OUT .= "OPTIONS=\"-i $interfa  $bogonset -f /var/lib/arpwatch/arp.dat -u arpwatch -e $mailset -s 'arpwatch\@${'DomainName'}'\"\n";
 }
 
