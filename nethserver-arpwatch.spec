@@ -62,8 +62,9 @@ rm -rf $RPM_BUILD_ROOT
 %post
 
 %changelog
-* Tue Nov 23 2015 dz00te <dz00te@framassa.org> 1.0.0-2.ns6
-- Enabled service after install on green ethX
+* Tue Dec 13 2015 dz00te <dz00te@framassa.org> 1.0.0-2.ns6
+- Add support to multiple eth in config and custom init script
+  Enabled service after install on green ethX
 
 * Tue Nov 21 2015 dz00te <dz00te@framassa.org> 1.0.0-1.ns6
 - First release to Nethserver
