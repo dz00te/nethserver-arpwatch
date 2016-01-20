@@ -11,8 +11,6 @@ my $event = "nethserver-arpwatch-update";
 
 event_actions($event,'initialize-default-databases' => '00');
 
-#Templates to expand
-templates2events("/etc/sysconfig/arpwatch", $event);
 templates2events("/etc/rc.d/init.d/arpwatch", $event);
 
 event_services($event, 'arpwatch' => 'restart');
@@ -24,3 +22,6 @@ event_services($event, 'arpwatch' => 'restart');
 
 my $event = "nethserver-arpwatch-save";
 event_services($event, 'arpwatch' => 'restart');
+
+#Templates to expand
+templates2events("/etc/sysconfig/arpwatch", $event);

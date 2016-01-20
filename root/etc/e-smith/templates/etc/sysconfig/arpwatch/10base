@@ -6,7 +6,7 @@
 use esmith::NetworksDB;
 my $ndb = esmith::NetworksDB->open_ro();
 my $db = esmith::ConfigDB->open or die "Couldn't open ConfigDB\n";
-my $interfa = '';
+my $interfa = ${'arpwatch'}{'interface'};
 
 my $bogonset='';
 my $bogon = ${'arpwatch'}{'bogon'};
@@ -19,17 +19,19 @@ else {
 }
 
 
-### set prop interface on green net
+### set prop interface on green net if interface is not populated
 
-foreach my $i ($ndb->green) {
-     my $intx = $i->key;
-     $interfa = $interfa . $intx . " ";
-     if ($intx eq '') {
-        $interfaces = $i;
-     } else {
-     }    
+if ($interfa eq "") {
+    foreach my $i ($ndb->green) {
+        my $intx = $i->key;
+        $interfa = $interfa . $intx . " ";
+        if ($intx eq '') {
+    	    $interfaces = $i;
+	     } else {
+        }    
+    }
 }
-#print "$interfa\n";
+
 
 $db->set_prop('arpwatch', 'interface', $interfa);
 
@@ -40,4 +42,5 @@ $OUT .= "INTERFACES=\"$interfa\"\n";
 
 #$OUT .= "OPTIONS=\"-i $interfa  $bogonset -f /var/lib/arpwatch/arp.dat -u arpwatch -e $mailset -s 'arpwatch\@${'DomainName'}'\"\n";
 }
+
 
