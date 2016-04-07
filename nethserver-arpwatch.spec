@@ -1,20 +1,4 @@
-# nethserver-arpwatch.spec, 2015/10/21 dz00te
-
-#%define name nethserver-arpwatch
-#%define version 1.0.0
-#%define release 1%
-#%define dist .ns7
-
-#Summary: Arpwatch is a tool that monitors ethernet activity
-#Name: %{name}
-#Version: %{version}
-#Release: %{release}{dist}
-#License: GNU GPL version 3
-#Source: %{name}-%{version}.tar.gz
-#BuildArchitectures: noarch
-#URL: %{url_prefix}/%{name} 
-##URL: http://dev.nethserver.org/projects/nethforge/wiki/%{name}
-#############
+# nethserver-arpwatch.spec, 2016/04/07 dz00te
 
 Name: nethserver-arpwatch
 Summary: Arpwatch is a tool that monitors ethernet activity
@@ -73,11 +57,11 @@ rm -rf %{buildroot}
 %post
 
 %changelog
-* Tue Dec 13 2015 dz00te <dz00te@framassa.org> - 1.0.0-2
+* Sun Dec 13 2015 dz00te <dz00te@framassa.org> - 1.0.0-2
 - Add support to multiple eth in config and custom init script
   Enabled service after install on green ethX
 
-* Tue Nov 21 2015 dz00te <dz00te@framassa.org> 1.0.0-1.ns6
+* Sat Nov 21 2015 dz00te <dz00te@framassa.org> 1.0.0-1.ns6
 - First release to Nethserver
   Thanks to Stephane de Labrusse, JP Pialasse, Daniel B.
 
