@@ -1,25 +1,35 @@
 # nethserver-arpwatch.spec, 2015/10/21 dz00te
 
-%define name nethserver-arpwatch
-%define version 1.0.0
-%define release 2
-%define dist .ns6
+#%define name nethserver-arpwatch
+#%define version 1.0.0
+#%define release 1%
+#%define dist .ns7
 
+#Summary: Arpwatch is a tool that monitors ethernet activity
+#Name: %{name}
+#Version: %{version}
+#Release: %{release}{dist}
+#License: GNU GPL version 3
+#Source: %{name}-%{version}.tar.gz
+#BuildArchitectures: noarch
+#URL: %{url_prefix}/%{name} 
+##URL: http://dev.nethserver.org/projects/nethforge/wiki/%{name}
+#############
+
+Name: nethserver-arpwatch
 Summary: Arpwatch is a tool that monitors ethernet activity
-Name: %{name}
-Version: %{version}
-Release: %{release}%{dist}
-License: GNU GPL version 3
+Version: 1.0.0
+Release: 2%{?dist}
+License: GPL
 Source: %{name}-%{version}.tar.gz
-
-BuildArchitectures: noarch
-URL: http://dev.nethserver.org/projects/nethforge/wiki/%{name}
+BuildArch: noarch
+URL: %{url_prefix}/%{name}
 
 
 BuildRequires: nethserver-devtools
 #BuildRoot: /var/tmp/%{name}-%{version}-%{release}-buildroot
 
-AutoReq: no
+#AutoReq: no
 #Requires: nethserver-base
 Requires: arpwatch
 
@@ -38,31 +48,32 @@ user-level packet capture.
 %build
 #%{makedocs}
 perl createlinks
-%{__mkdir_p} root/var/lib/arpwatch
+#%{__mkdir_p} root/var/lib/arpwatch
 
 %install
-rm -rf $RPM_BUILD_ROOT
-(cd root   ; find . -depth -print | cpio -dump $RPM_BUILD_ROOT)
+rm -rf %{buildroot}
+(cd root   ; find . -depth -print | cpio -dump %{buildroot})
 
-#%{genfilelist} $RPM_BUILD_ROOT > %{name}-%{version}-filelist
-%{genfilelist} $RPM_BUILD_ROOT \
-	--dir /var/lib/arpwatch 'attr(0775,root,root)' \
-> %{name}-%{version}-filelist
+%{genfilelist} %{buildroot} > %{name}-%{version}-filelist
+#%{genfilelist} %{buildroot} \
+#	--dir /var/lib/arpwatch 'attr(0775,root,root)' \
+#> %{name}-%{version}-filelist
 
 %files -f %{name}-%{version}-filelist
 %defattr(-,root,root)
+%dir %{_nseventsdir}/%{name}-save
+%dir %{_nseventsdir}/%{name}-update
+#%dir %{_nsdbconfdir}/arpwatch
+#%{_datadir}/var/lib/arpwatch
 
 %clean
-rm -rf $RPM_BUILD_ROOT
+rm -rf %{buildroot}
 
-#%files -f e-smith-%{version}-filelist
-#%files -f %{name}-%{version}-filelist
-#%defattr(-,root,root)
 
 %post
 
 %changelog
-* Tue Dec 13 2015 dz00te <dz00te@framassa.org> 1.0.0-2.ns6
+* Tue Dec 13 2015 dz00te <dz00te@framassa.org> - 1.0.0-2
 - Add support to multiple eth in config and custom init script
   Enabled service after install on green ethX
 
