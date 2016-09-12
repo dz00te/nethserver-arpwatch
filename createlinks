@@ -10,12 +10,13 @@ use esmith::Build::CreateLinks qw(:all);
 my $event = "nethserver-arpwatch-update";
 
 event_actions($event,'initialize-default-databases' => '00');
+event_actions($event,'arpwatch_enable' => '50');
 
 #Templates to expand
 templates2events("/etc/sysconfig/arpwatch", $event);
-templates2events("/etc/rc.d/init.d/arpwatch", $event);
+#templates2events("/etc/rc.d/init.d/arpwatch", $event);
 
-event_services($event, 'arpwatch' => 'restart');
+#event_services($event, 'arpwatch@' => 'restart');
 
 #
 # actions for nethserver-atpwatch-save event
@@ -23,7 +24,8 @@ event_services($event, 'arpwatch' => 'restart');
 #
 
 my $event = "nethserver-arpwatch-save";
-event_services($event, 'arpwatch' => 'restart');
+#event_services($event, 'arpwatch' => 'restart');
+event_actions($event,'arpwatch_enable' => '50');
 
 #Templates to expand
 templates2events("/etc/sysconfig/arpwatch", $event);
