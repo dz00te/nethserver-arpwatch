@@ -1,0 +1,8 @@
+/usr/bin/systemctl stop arpwatch.service
+/usr/bin/systemctl disable arpwatch.service
+rm /usr/lib/systemd/system/arpwatch.service
+. /etc/sysconfig/arpwatch
+for dev in $(echo $ARPWATCH_INTERFACE | sed 's/,/ /g');do
+systemctl enable arpwatch@${dev}.service
+systemctl start arpwatch@${dev}.service
+done
