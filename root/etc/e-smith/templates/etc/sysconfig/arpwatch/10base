@@ -11,7 +11,7 @@ my $interfa = ${'arpwatch'}{'interface'};
 my $bogonset='';
 my $bogon = ${'arpwatch'}{'bogon'};
 
-if ($bogon eq 'enabled') {
+if ($bogon eq 'yes') {
  $bogonset = '';
 }
 else {
