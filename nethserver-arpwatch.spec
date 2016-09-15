@@ -57,6 +57,7 @@ rm -rf %{buildroot}
 %post
 /usr/bin/systemctl stop arpwatch.service
 /usr/bin/systemctl disable arpwatch.service
+/usr/bin/systemctl mask arpwatch.service
 
 %changelog
 
