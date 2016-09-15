@@ -1,6 +1,6 @@
 #simple bash script to chek status of arpwatch@ instaces
 
-if [ "`/usr/bin/systemctl is-active arpwatch`" == "active" ]; then
+if [ "`/usr/bin/systemctl is-active arpwatch`" == "active" ] || [ "`/usr/bin/systemctl is-enabled arpwatch`" == "enabled" ] ; then
         /usr/bin/systemctl stop arpwatch.service
         /usr/bin/systemctl disable arpwatch.service
         rm /usr/lib/systemd/system/arpwatch.service
