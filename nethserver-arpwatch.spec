@@ -3,7 +3,7 @@
 Name: nethserver-arpwatch
 Summary: Arpwatch is a tool that monitors ethernet activity
 Version: 1.0.0
-Release: 3%{?dist}
+Release: 4%{?dist}
 License: GPL
 Source: %{name}-%{version}.tar.gz
 BuildArch: noarch
@@ -30,7 +30,7 @@ user-level packet capture.
 %setup
 
 %build
-#%{makedocs}
+%{makedocs}
 perl createlinks
 #%{__mkdir_p} root/var/lib/arpwatch
 
@@ -59,6 +59,10 @@ rm -rf %{buildroot}
 /usr/bin/systemctl disable arpwatch.service
 
 %changelog
+
+* Wed Sep 15 2016 dz00te <dz00te@framassa.org> - 1.0.0-4
+- Initial basic webUI
+
 * Mon Sep 12 2016 dz00te <dz00te@framassa.org> - 1.0.0-3
 - Add support to multiple eth in config and custom systemd script for el7
 

@@ -1,8 +1,25 @@
-/usr/bin/systemctl stop arpwatch.service
-/usr/bin/systemctl disable arpwatch.service
-rm /usr/lib/systemd/system/arpwatch.service
-. /etc/sysconfig/arpwatch
-for dev in $(echo $ARPWATCH_INTERFACE | sed 's/,/ /g');do
-systemctl enable arpwatch@${dev}.service
-systemctl start arpwatch@${dev}.service
-done
+#simple bash script to chek status of arpwatch@ instaces
+
+if [ "`/usr/bin/systemctl is-active arpwatch`" == "active" ]; then
+        /usr/bin/systemctl stop arpwatch.service
+        /usr/bin/systemctl disable arpwatch.service
+        rm /usr/lib/systemd/system/arpwatch.service
+        exit 0
+fi
+
+status=$(/usr/sbin/e-smith/config getprop arpwatch status)
+
+if [ "$status" = "enabled" ]; then
+    . /etc/sysconfig/arpwatch
+    for dev in $(echo $ARPWATCH_INTERFACE | sed 's/,/ /g');do
+    systemctl enable arpwatch@${dev}.service
+    systemctl start arpwatch@${dev}.service
+    done
+else
+    . /etc/sysconfig/arpwatch
+    for dev in $(echo $ARPWATCH_INTERFACE | sed 's/,/ /g');do
+    systemctl disable arpwatch@${dev}.service
+    systemctl stop arpwatch@${dev}.service
+    done
+fi
+
